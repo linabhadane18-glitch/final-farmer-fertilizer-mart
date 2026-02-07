@@ -1,0 +1,68 @@
+.ifco-wrapper {
+  display: flex;
+  width: 100%;
+  height: 75vh;
+  overflow: hidden;
+}
+
+/* EACH PANEL */
+.ifco-panel {
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+   background-repeat: no-repeat;   /* 🚫 stop replica */
+  background-size: cover;         /* ✅ fill nicely */
+  background-position: center;    /* 🎯 keep center */
+}
+
+.ifco-panel:hover {
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(255, 255, 255, 0.15); /* 👈 soft glow */
+  z-index: 3;
+}
+.ifco-panel:hover .ifco-text {
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  transform: scale(1.05);
+  transition: all 0.4s ease;
+}
+/* DARK OVERLAY */
+.ifco-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.45)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* VERTICAL TEXT */
+.ifco-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 4px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .ifco-wrapper {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .ifco-panel {
+    height: 200px;
+  }
+
+  .ifco-text {
+    writing-mode: horizontal-tb;
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,142 @@
+:root {
+  --green-dark: #1b5e20;
+  --green: #2e7d32;
+  --yellow: #fbc02d;
+  --light-bg: #f1f8e9;
+  --border: #c8e6c9;
+}
+
+/* Card */
+.agri-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.agri-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Image */
+.agri-image-box {
+  position: relative;
+  background: linear-gradient(180deg, #f1f8e9, #ffffff);
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.agri-image-box img {
+  max-width: 140px;
+  transition: transform 0.3s;
+}
+
+.agri-card:hover img {
+  transform: scale(1.1);
+}
+
+/* Category badge */
+.agri-category {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--yellow);
+  color: var(--green-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* Content */
+.agri-content {
+  padding: 16px;
+}
+
+.agri-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Rating */
+.agri-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.agri-rating img {
+  width: 14px;
+}
+
+.agri-rating span {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Bottom */
+.agri-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Price */
+.agri-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.agri-price span {
+  font-size: 0.8rem;
+  margin-left: 6px;
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+/* Add button */
+.agri-add-btn {
+  background: linear-gradient(135deg, var(--yellow), #f9a825);
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 700;
+  color: var(--green-dark);
+  cursor: pointer;
+}
+
+/* Counter */
+.agri-counter {
+  display: flex;
+  align-items: center;
+  background: var(--light-bg);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.agri-counter button {
+  border: none;
+  background: none;
+  padding: 4px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--green-dark);
+}
+
+.agri-counter span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-width: 18px;
+  text-align: center;
+}

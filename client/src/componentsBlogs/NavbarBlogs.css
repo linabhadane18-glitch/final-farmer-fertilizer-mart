@@ -1,0 +1,93 @@
+.navbar {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  padding: 0.9rem 0;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.navbar__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar__brand {
+  text-decoration: none;
+  color: #ecfdf5;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.navbar__brand-main {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.navbar__brand-sub {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+}
+
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.navbar__link {
+  color: #ecfdf5;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.navbar__link:hover {
+  background-color: rgba(15, 23, 42, 0.15);
+  transform: translateY(-1px);
+}
+
+.navbar__link--active {
+  background-color: rgba(15, 23, 42, 0.22);
+}
+
+.navbar__link--primary {
+  border-radius: 999px;
+  padding: 7px 14px;
+  background: #0f172a;
+}
+
+.navbar__link--primary:hover {
+  background: #020617;
+}
+
+@media (max-width: 768px) {
+  .navbar__inner {
+    gap: 0.9rem;
+  }
+
+  .navbar__brand-main {
+    font-size: 1.05rem;
+  }
+
+  .navbar__brand-sub {
+    font-size: 0.7rem;
+  }
+
+  .navbar__nav {
+    gap: 0.6rem;
+  }
+
+  .navbar__link {
+    font-size: 0.85rem;
+  }
+}
+

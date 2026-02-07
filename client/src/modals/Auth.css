@@ -1,0 +1,127 @@
+/* BACKDROP */
+.auth-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 83, 45, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+/* CARD */
+.auth-form {
+  width: 360px;
+  background: linear-gradient(180deg, #f7fee7, #ecfccb);
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+  padding: 0 2rem 2.2rem;
+  animation: growIn 0.4s ease;
+}
+
+/* HEADER STRIP */
+.auth-header {
+  background: linear-gradient(135deg, #22c55e, #fde047);
+  text-align: center;
+  padding: 1rem;
+  border-radius: 18px 18px 0 0;
+  font-weight: 800;
+  color: #14532d;
+  margin: 0 -2rem 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+/* TITLE */
+.auth-title {
+  text-align: center;
+  color: #14532d;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+/* INPUT FIELDS */
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.8rem;
+}
+
+.auth-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #166534;
+}
+
+.auth-input {
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1.5px solid #bbf7d0;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.auth-input:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+}
+
+/* PASSWORD */
+.password-wrapper {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* BUTTON */
+.auth-button {
+  width: 100%;
+  margin-top: 0.8rem;
+  padding: 0.75rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #14532d;
+  background: linear-gradient(135deg, #fde047, #22c55e);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(34, 197, 94, 0.35);
+}
+
+/* TOGGLE */
+.auth-toggle {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #166534;
+}
+
+.auth-toggle span {
+  color: #a16207;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ANIMATION */
+@keyframes growIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,93 @@
+.myorders-wrapper {
+  margin-top: 48px;
+  padding-bottom: 64px;
+  padding: 0 16px;
+}
+
+.myorders-heading {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.order-container {
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  max-width: 64rem;
+  background-color: #fff;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.order-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  color: rgba(31, 41, 55, 0.7);
+  padding: 20px 0;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #d1d5db;
+}
+
+@media (min-width: 768px) {
+  .order-item {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.order-product {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .order-product {
+    margin-bottom: 0;
+  }
+}
+
+.order-image-container {
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.order-image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.order-product-details {
+  margin-left: 16px;
+}
+
+.product-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.order-info {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.order-amount {
+  font-size: 16px;
+  font-weight: 500;
+}
