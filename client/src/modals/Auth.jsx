@@ -29,8 +29,9 @@ const Auth = () => {
       } else {
         toast.error(data.message);
       }
-    } catch {
-      toast.error("Something went wrong");
+    } catch (error) {
+  alert(error.response?.data?.message || error.message);
+      
     }
   };
 

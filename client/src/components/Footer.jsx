@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="footer-brand">
           <h1 className="footer-title">Maatisakha</h1>
           <p className="footer-description">
-           This Fertilizer Website  is a project developed by GPJ students as part of our learning journey, aiming to make daily shopping smarter, faster, and more convenient for everyone
+           This Fertilizer Website  is a project developed by RCPIT students as part of our learning journey, aiming to make daily shopping smarter, faster, and more convenient for everyone
           </p>
           <div className="footer-social-icons">
             {/* Instagram */}

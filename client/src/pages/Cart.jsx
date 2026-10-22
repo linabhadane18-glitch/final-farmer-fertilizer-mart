@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useAppContext } from "../context/AppContext";
-import { dummyAddress } from "../assets/assets";
-import axios from "axios";
 import toast from "react-hot-toast";
-import "./Cart.css"; // Import the plain CSS file
+import "./Cart.css";
 
 const Cart = () => {
   const {
@@ -20,55 +18,74 @@ const Cart = () => {
   } = useAppContext();
 
   const [cartArray, setCartArray] = useState([]);
-  const [address, setAddress] = useState([]);
-  const [showAddress, setShowAddress] = useState(false);
+  const [addresses, setAddresses] = useState([]);
+  const [showAddressDropdown, setShowAddressDropdown] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentOption, setPaymentOption] = useState("COD");
 
-  const getCart = () => {
-    let tempArray = [];
-    for (const key in cartItems) {
-      const product = products.find((product) => product._id === key);
-      if (product) {
-        product.quantity = cartItems[key];
-        tempArray.push(product);
-      }
-    }
+  /* =========================
+     Build Cart Array
+  ========================== */
+  useEffect(() => {
+    if (!products.length || !cartItems) return;
+
+    const tempArray = Object.keys(cartItems).map((id) => {
+      const product = products.find((item) => item._id === id);
+      return product
+        ? { ...product, quantity: cartItems[id] }
+        : null;
+    }).filter(Boolean);
+
     setCartArray(tempArray);
-  };
-
-  const getAddress = async () => {
-    try {
-      const { data } = await axios.get("/api/address/get");
-      if (data.success) {
-        setAddress(data.addresses);
-        if (data.addresses.length > 0) {
-          setSelectedAddress(data.addresses[0]);
-        }
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
-  useEffect(() => {
-    if (user) {
-      getAddress();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (products.length > 0 && cartItems) {
-      getCart();
-    }
   }, [products, cartItems]);
 
-  const placeOrder = async () => {
-    try {
-      if (!selectedAddress) return toast.error("Please select an address");
+  /* =========================
+     Fetch Addresses
+  ========================== */
+  useEffect(() => {
+    if (!user) return;
 
+    const fetchAddresses = async () => {
+      try {
+        const { data } = await axios.get("/api/address/get");
+        if (data.success) {
+          setAddresses(data.addresses);
+          if (data.addresses.length) {
+            setSelectedAddress(data.addresses[0]);
+          }
+        } else {
+          toast.error(data.message);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+
+    fetchAddresses();
+  }, [user, axios]);
+
+  /* =========================
+     Pricing Calculations
+  ========================== */
+  const taxAmount = useMemo(
+    () => (totalCartAmount() * 2) / 100,
+    [totalCartAmount]
+  );
+
+  const finalAmount = useMemo(
+    () => totalCartAmount() + taxAmount,
+    [totalCartAmount, taxAmount]
+  );
+
+  /* =========================
+     Place Order
+  ========================== */
+  const placeOrder = async () => {
+    if (!selectedAddress) {
+      return toast.error("Please select an address");
+    }
+
+    try {
       if (paymentOption === "COD") {
         const { data } = await axios.post("/api/order/cod", {
           items: cartArray.map((item) => ({
@@ -91,8 +108,11 @@ const Cart = () => {
     }
   };
 
-  return products.length > 0 && cartItems ? (
+  if (!products.length || !cartItems) return null;
+
+  return (
     <div className="cart-wrapper">
+      {/* ================= LEFT SECTION ================= */}
       <div className="cart-left">
         <h1 className="cart-title">
           Shopping Cart <span>{cartCount()} Items</span>
@@ -100,46 +120,54 @@ const Cart = () => {
 
         <div className="cart-header">
           <p>Product Details</p>
-          <p style={{ textAlign: "center" }}>Subtotal</p>
-          <p style={{ textAlign: "center" }}>Action</p>
+          <p className="text-center">Subtotal</p>
+          <p className="text-center">Action</p>
         </div>
 
-        {cartArray.map((product, index) => (
-          <div key={index} className="cart-item">
+        {cartArray.map((product) => (
+          <div key={product._id} className="cart-item">
             <div className="cart-product">
               <div
+                className="cart-product-img"
                 onClick={() => {
                   navigate(`product/${product.category}/${product._id}`);
-                  scrollTo(0, 0);
+                  window.scrollTo(0, 0);
                 }}
-                className="cart-product-img"
               >
                 <img
                   src={`http://localhost:5000/images/${product.image[0]}`}
                   alt={product.name}
                 />
               </div>
+
               <div className="cart-product-info">
-                <p>{product.name}</p>
-                <div className="cart-product-weight">
+                <p className="product-name">{product.name}</p>
+
+                <div className="cart-product-meta">
                   <p>
                     Weight: <span>{product.weight || "N/A"}</span>
                   </p>
+
                   <div className="cart-product-qty">
-                    <p>Qty:</p>
+                    <label>Qty:</label>
                     <select
-                      onChange={(e) =>
-                        updateCartItem(product._id, Number(e.target.value))
-                      }
                       value={cartItems[product._id]}
+                      onChange={(e) =>
+                        updateCartItem(
+                          product._id,
+                          Number(e.target.value)
+                        )
+                      }
                     >
                       {Array(
-                        cartItems[product._id] > 9 ? cartItems[product._id] : 9
+                        cartItems[product._id] > 9
+                          ? cartItems[product._id]
+                          : 9
                       )
-                        .fill("")
-                        .map((_, index) => (
-                          <option key={index} value={index + 1}>
-                            {index + 1}
+                        .fill(null)
+                        .map((_, i) => (
+                          <option key={i + 1} value={i + 1}>
+                            {i + 1}
                           </option>
                         ))}
                     </select>
@@ -147,99 +175,83 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <p style={{ textAlign: "center" }}>
+
+            <p className="text-center">
               Rs.{product.offerPrice * product.quantity}
             </p>
+
             <button
-              onClick={() => removeFromCart(product._id)}
               className="cart-remove-btn"
+              onClick={() => removeFromCart(product._id)}
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="m12.5 7.5-5 5m0-5 5 5m5.833-2.5a8.333 8.333 0 1 1-16.667 0 8.333 8.333 0 0 1 16.667 0"
-                  stroke="#FF532E"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              Remove
             </button>
           </div>
         ))}
 
         <button
-          onClick={() => navigate("/products")}
           className="continue-shopping"
+          onClick={() => navigate("/products")}
         >
-          <svg
-            width="15"
-            height="11"
-            viewBox="0 0 15 11"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M14.09 5.5H1M6.143 10 1 5.5 6.143 1"
-              stroke="#615fff"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          Continue Shopping
+          ← Continue Shopping
         </button>
       </div>
 
+      {/* ================= RIGHT SECTION ================= */}
       <div className="cart-summary">
         <h2>Order Summary</h2>
         <hr />
-        <div>
-          <p className="delivery-address-label">Delivery Address</p>
-          <div className="relative" style={{ position: "relative" }}>
+
+        <div className="summary-section">
+          <p className="section-label">Delivery Address</p>
+
+          <div className="delivery-address-wrapper">
             <div className="delivery-address">
               {selectedAddress
                 ? `${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.state}, ${selectedAddress.country}`
                 : "No Address Found"}
             </div>
+
             <button
-              onClick={() => setShowAddress(!showAddress)}
               className="change-address-btn"
+              onClick={() =>
+                setShowAddressDropdown(!showAddressDropdown)
+              }
             >
               Change
             </button>
-            {showAddress && (
+
+            {showAddressDropdown && (
               <div className="address-dropdown">
-                {address.map((addr, index) => (
+                {addresses.map((addr) => (
                   <p
-                    key={index}
+                    key={addr._id}
                     onClick={() => {
                       setSelectedAddress(addr);
-                      setShowAddress(false);
+                      setShowAddressDropdown(false);
                     }}
                   >
-                    {addr.street}, {addr.city}, {addr.state}, {addr.country}
+                    {addr.street}, {addr.city}, {addr.state},{" "}
+                    {addr.country}
                   </p>
                 ))}
+
                 <p
-                  onClick={() => navigate("/add-address")}
                   className="add-address-link"
+                  onClick={() => navigate("/add-address")}
                 >
-                  Add address
+                  + Add Address
                 </p>
               </div>
             )}
           </div>
 
-          <p className="payment-method-label">Payment Method</p>
+          <p className="section-label">Payment Method</p>
+
           <select
-            onChange={(e) => setPaymentOption(e.target.value)}
             className="payment-method-select"
+            value={paymentOption}
+            onChange={(e) => setPaymentOption(e.target.value)}
           >
             <option value="COD">Cash On Delivery</option>
             <option value="Online">Online Payment</option>
@@ -253,28 +265,34 @@ const Cart = () => {
             <span>Price</span>
             <span>Rs.{totalCartAmount()}</span>
           </p>
+
           <p>
             <span>Shipping Fee</span>
-            <span className="text-green-600">Free</span>
+            <span className="free-shipping">Free</span>
           </p>
+
           <p>
             <span>Tax (2%)</span>
-            <span>Rs.{(totalCartAmount() * 2) / 100}</span>
+            <span>Rs.{taxAmount}</span>
           </p>
+
           <p className="summary-total">
-            <span>Total Amount:</span>
-            <span>
-              Rs.{totalCartAmount() + (totalCartAmount() * 2) / 100}
-            </span>
+            <span>Total Amount</span>
+            <span>Rs.{finalAmount}</span>
           </p>
         </div>
 
-        <button onClick={placeOrder} className="place-order-btn">
-          {paymentOption === "COD" ? "Place Order" : "Proceed to Checkout"}
+        <button
+          className="place-order-btn"
+          onClick={placeOrder}
+        >
+          {paymentOption === "COD"
+            ? "Place Order"
+            : "Proceed to Checkout"}
         </button>
       </div>
     </div>
-  ) : null;
+  );
 };
 
 export default Cart;

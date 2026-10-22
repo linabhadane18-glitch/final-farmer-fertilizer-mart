@@ -1,18 +1,21 @@
-:root {
-  --green-dark: #1b5e20;
-  --green: #2e7d32;
-  --yellow: #fbc02d;
-  --yellow-dark: #f9a825;
-  --light-bg: #f1f8e9;
-  --white: #ffffff;
-}
-
-/* Section Background */
+/* Newsletter Section - Professional Design */
 .newsletter-bg {
   padding: 5rem 1rem;
-  background: linear-gradient(180deg, #f1f8e9, #fffde7);
+  background: linear-gradient(180deg, var(--neutral-50) 0%, white 50%, var(--neutral-50) 100%);
   display: flex;
   justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .newsletter-bg {
+    padding: 5rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .newsletter-bg {
+    padding: 6rem 2rem;
+  }
 }
 
 /* Card */
@@ -20,120 +23,204 @@
   max-width: 1100px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  background: var(--white);
-  border-radius: 20px;
+  grid-template-columns: 1fr;
+  background: white;
+  border-radius: var(--radius-2xl);
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--neutral-200);
+}
+
+@media (min-width: 768px) {
+  .newsletter-card {
+    grid-template-columns: 1.3fr 0.7fr;
+  }
 }
 
 /* Left Side */
 .newsletter-left {
-  padding: 3.5rem;
+  padding: 2rem;
+}
+
+@media (min-width: 640px) {
+  .newsletter-left {
+    padding: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .newsletter-left {
+    padding: 3rem;
+  }
 }
 
 .newsletter-badge {
-  display: inline-block;
-  background: var(--yellow);
-  color: var(--green-dark);
-  padding: 6px 16px;
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-xl);
   font-weight: 600;
-  font-size: 0.85rem;
-  margin-bottom: 16px;
+  font-size: 0.8125rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  box-shadow: var(--shadow-sm);
 }
 
 .newsletter-left h2 {
-  font-size: 2.4rem;
-  color: var(--green);
-  margin-bottom: 12px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--neutral-900);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+@media (min-width: 640px) {
+  .newsletter-left h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .newsletter-left h2 {
+    font-size: 2.25rem;
+  }
 }
 
 .newsletter-left p {
-  color: #4b5563;
-  font-size: 1.05rem;
-  max-width: 520px;
-  margin-bottom: 28px;
+  color: var(--neutral-500);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 480px;
+  margin-bottom: 1.5rem;
 }
 
 /* Form */
 .newsletter-form {
   display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .newsletter-form {
+    flex-direction: column;
+  }
 }
 
 .newsletter-form input {
   flex: 1;
-  padding: 14px 18px;
-  border-radius: 999px;
-  border: 2px solid #c5e1a5;
+  padding: 0.875rem 1.25rem;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid var(--neutral-200);
   outline: none;
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
+  color: var(--neutral-700);
+  background: var(--neutral-50);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.newsletter-form input::placeholder {
+  color: var(--neutral-400);
 }
 
 .newsletter-form input:focus {
-  border-color: var(--green);
+  border-color: var(--primary-green);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
 .newsletter-form button {
-  padding: 14px 28px;
-  border-radius: 999px;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-xl);
   border: none;
-  background: linear-gradient(135deg, var(--yellow), var(--yellow-dark));
-  color: var(--green-dark);
-  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9375rem;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .newsletter-form button {
+    width: 100%;
+  }
 }
 
 .newsletter-form button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.newsletter-form button:active {
+  transform: translateY(0);
 }
 
 /* Perks */
 .newsletter-perks {
   display: flex;
-  gap: 18px;
+  gap: 1rem;
   flex-wrap: wrap;
-  color: var(--green);
-  font-size: 0.95rem;
+  color: var(--primary-green);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.newsletter-perks span {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
 }
 
 /* Right Side */
 .newsletter-right {
-  background: linear-gradient(160deg, var(--green-dark), var(--green));
+  background: linear-gradient(160deg, var(--primary-green-dark) 0%, var(--primary-green) 100%);
   color: white;
-  padding: 3.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .newsletter-right {
+    padding: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .newsletter-right {
+    padding: 3rem;
+  }
 }
 
 .newsletter-right h3 {
-  font-size: 1.6rem;
-  margin-bottom: 18px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.025em;
 }
 
 .newsletter-right ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .newsletter-right li {
-  margin-bottom: 12px;
-  font-size: 0.95rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .newsletter-card {
-    grid-template-columns: 1fr;
-  }
-
-  .newsletter-form {
-    flex-direction: column;
-  }
-
-  .newsletter-form button {
-    width: 100%;
-  }
+  font-size: 0.9375rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.95;
 }

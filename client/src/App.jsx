@@ -41,7 +41,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/AboutUs" element={<AboutUs/>} />
-          <Route path="/blogs/*" element={<Blogs />} />
+          <Route path="/blogs" element={<Blogs />} />
           <Route path="/products/:category" element={<ProductCategory />} />
           <Route path="/product/:category/:id" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
@@ -51,7 +51,7 @@ const App = () => {
           <Route path="/animatedbanner" element={<AnimatedBanner /> } />
         <Route path="/blogs" element={<Blogs/>}/>
         <Route path="/blog-list" element={<BlogList/>}/>
-        <Route path=":id" element={<BlogDetail/>}/>
+        <Route path="/blog/:id" element={<BlogDetail/>}/>
         <Route path="/add" element={<AddBlog/>}/>
   
           <Route

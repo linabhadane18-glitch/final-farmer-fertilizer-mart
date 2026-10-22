@@ -9,7 +9,7 @@ import {
   getLatestBlogs,
   getPopularBlogs,
   createBlogWithImage,
-} from "../controller/blogController.js";
+} from "../controller/blog.Controller.js";
 
 const router = express.Router();
 
@@ -17,7 +17,7 @@ const router = express.Router();
 router.get("/", getAllBlogs);
 router.get("/latest", getLatestBlogs);
 router.get("/popular", getPopularBlogs);
-router.get("/:id", getBlogById);
+router.get("/blog/:id", getBlogById);
 
 // Admin routes (Add authentication / auth middleware later)
 router.post("/", createBlog);

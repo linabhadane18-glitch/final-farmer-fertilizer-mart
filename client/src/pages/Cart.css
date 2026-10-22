@@ -1,12 +1,17 @@
-/* Container layout */
+/* =========================================
+   Cart Layout
+========================================= */
+
 .cart-wrapper {
   display: flex;
   flex-direction: column;
-  padding: 64px 24px;
-  max-width: 96rem;
-  width: 100%;
-  margin: 0 auto;
   gap: 32px;
+
+  width: 100%;
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: 64px 24px;
+
   background-color: #f1f8e9;
 }
 
@@ -21,38 +26,53 @@
   max-width: 64rem;
 }
 
+/* =========================================
+   Cart Title
+========================================= */
+
 .cart-title {
+  margin-bottom: 24px;
+
   font-size: 28px;
   font-weight: 600;
-  margin-bottom: 24px;
   color: #1b5e20;
 }
 
 .cart-title span {
-  font-size: 14px;
-  color: #fbc02d;
   margin-left: 12px;
+
+  font-size: 14px;
   font-weight: 600;
+  color: #fbc02d;
+}
+
+/* =========================================
+   Cart Table Header & Items
+========================================= */
+
+.cart-header,
+.cart-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
 }
 
 .cart-header {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  color: #2e7d32;
+  padding-bottom: 12px;
+
   font-size: 16px;
   font-weight: 600;
-  padding-bottom: 12px;
+  color: #2e7d32;
+
   border-bottom: 2px solid #c8e6c9;
 }
 
 .cart-item {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
   align-items: center;
+  padding-top: 16px;
+
   font-size: 14px;
   font-weight: 500;
   color: #33691e;
-  padding-top: 16px;
 }
 
 @media (min-width: 768px) {
@@ -61,7 +81,10 @@
   }
 }
 
-/* Product detail */
+/* =========================================
+   Product Details
+========================================= */
+
 .cart-product {
   display: flex;
   align-items: center;
@@ -75,14 +98,17 @@
 }
 
 .cart-product-img {
-  width: 96px;
-  height: 96px;
-  border: 2px solid #a5d6a7;
-  border-radius: 8px;
-  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 96px;
+  height: 96px;
+
+  background-color: #ffffff;
+  border: 2px solid #a5d6a7;
+  border-radius: 8px;
+
   cursor: pointer;
 }
 
@@ -110,38 +136,50 @@
 }
 
 .cart-product-qty select {
-  outline: none;
-  border: 1px solid #a5d6a7;
   padding: 4px;
+
+  border: 1px solid #a5d6a7;
+  outline: none;
 }
 
-/* Action icon */
+/* =========================================
+   Action Buttons
+========================================= */
+
 .cart-remove-btn {
-  cursor: pointer;
   display: flex;
   justify-content: center;
+
+  cursor: pointer;
   color: #c62828;
 }
 
-/* Continue shopping */
 .continue-shopping {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #2e7d32;
-  font-weight: 600;
+
   margin-top: 32px;
-  cursor: pointer;
+
   background: none;
   border: none;
+  cursor: pointer;
+
+  font-weight: 600;
+  color: #2e7d32;
 }
 
-/* Right side summary */
+/* =========================================
+   Cart Summary (Right Section)
+========================================= */
+
 .cart-summary {
-  max-width: 360px;
   width: 100%;
-  background-color: #ffffff;
+  max-width: 360px;
+
   padding: 20px;
+
+  background-color: #ffffff;
   border: 2px solid #c8e6c9;
 }
 
@@ -158,11 +196,16 @@
 }
 
 .cart-summary hr {
-  border: 1px solid #c8e6c9;
   margin: 20px 0;
+  border: 1px solid #c8e6c9;
 }
 
-.delivery-address-label {
+/* =========================================
+   Delivery Address
+========================================= */
+
+.delivery-address-label,
+.payment-method-label {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -171,43 +214,50 @@
 
 .delivery-address {
   margin-top: 8px;
+
   font-size: 14px;
   color: #33691e;
 }
 
 .change-address-btn {
+  margin-left: auto;
+
+  font-size: 14px;
+  color: #f9a825;
+
   background: none;
   border: none;
-  color: #f9a825;
   cursor: pointer;
   text-decoration: underline;
-  font-size: 14px;
-  margin-left: auto;
 }
 
-/* Payment method */
+/* =========================================
+   Payment Method
+========================================= */
+
 .payment-method-label {
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
   margin-top: 24px;
-  color: #558b2f;
 }
 
 .payment-method-select {
   width: 100%;
-  padding: 8px 12px;
   margin-top: 8px;
-  border: 1px solid #a5d6a7;
+  padding: 8px 12px;
+
   background: #ffffff;
+  border: 1px solid #a5d6a7;
   outline: none;
 }
 
-/* Summary totals */
+/* =========================================
+   Pricing Summary
+========================================= */
+
 .summary-pricing {
   margin-top: 16px;
-  color: #33691e;
+
   font-size: 14px;
+  color: #33691e;
 }
 
 .summary-pricing p {
@@ -217,21 +267,28 @@
 }
 
 .summary-total {
+  margin-top: 16px;
+
   font-size: 18px;
   font-weight: 700;
-  margin-top: 16px;
   color: #1b5e20;
 }
 
-/* Place order button */
+/* =========================================
+   Place Order Button
+========================================= */
+
 .place-order-btn {
   width: 100%;
-  padding: 12px 0;
   margin-top: 24px;
+  padding: 12px 0;
+
   background-color: #fbc02d;
-  color: #1b5e20;
-  font-weight: 700;
   border: none;
+
+  font-weight: 700;
+  color: #1b5e20;
+
   cursor: pointer;
   transition: background-color 0.2s ease;
 }

@@ -3,33 +3,50 @@ import ProductCard from "../components/ProductCard";
 import { useAppContext } from "../context/AppContext";
 import "./Products.css";
 
+/* =========================================
+   Products Page
+========================================= */
 const Products = () => {
   const { products, searchQuery } = useAppContext();
+
+  /* ---------- State ---------- */
   const [filteredProducts, setFilteredProducts] = useState([]);
 
+  /* ---------- Effects ---------- */
   useEffect(() => {
     if (searchQuery.length > 0) {
-      setFilteredProducts(
-        products.filter((product) =>
-          product.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+      const filtered = products.filter((product) =>
+        product.name
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())
       );
+
+      setFilteredProducts(filtered);
     } else {
       setFilteredProducts(products);
     }
   }, [products, searchQuery]);
 
+  /* =========================================
+     Render
+  ========================================= */
   return (
-    <div className="products-wrapper">
-      <h1 className="products-title">All Products</h1>
+    <section className="products-wrapper">
+      <header className="products-header">
+        <h1 className="products-title">All Products</h1>
+      </header>
+
       <div className="products-grid">
         {filteredProducts
           .filter((product) => product.inStock)
           .map((product, index) => (
-            <ProductCard key={index} product={product} />
+            <ProductCard
+              key={index}
+              product={product}
+            />
           ))}
       </div>
-    </div>
+    </section>
   );
 };
 

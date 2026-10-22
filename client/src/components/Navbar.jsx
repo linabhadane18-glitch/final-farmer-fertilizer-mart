@@ -52,7 +52,7 @@ const Navbar = () => {
         <div className="nav-links desktop-only">
           <Link to="/">Home</Link>
           <Link to="/products">Products</Link>
-          <Link to="/AboutUs">About Us</Link>
+          
           <Link to="/weather">Weather</Link>
           <Link to="/blogs">Blogs</Link>
 
@@ -108,7 +108,7 @@ const Navbar = () => {
       <div className={`nav-mobile-menu ${open ? "show" : ""}`}>
         <Link onClick={() => setOpen(false)} to="/">Home</Link>
         <Link onClick={() => setOpen(false)} to="/products">Products</Link>
-        <Link onClick={() => setOpen(false)} to="/AboutUs">About Us</Link>
+        
         <Link onClick={() => setOpen(false)} to="/blogs">Blogs</Link>
 
         {user ? (
